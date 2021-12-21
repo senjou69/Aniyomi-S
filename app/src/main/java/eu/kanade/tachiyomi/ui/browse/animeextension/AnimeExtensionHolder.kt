@@ -35,7 +35,6 @@ class AnimeExtensionHolder(view: View, val adapter: AnimeExtensionAdapter) :
             extension is AnimeExtension.Untrusted -> itemView.context.getString(R.string.ext_untrusted)
             extension is AnimeExtension.Installed && extension.isUnofficial -> itemView.context.getString(R.string.ext_unofficial)
             extension is AnimeExtension.Installed && extension.isObsolete -> itemView.context.getString(R.string.ext_obsolete)
-            extension.isNsfw -> itemView.context.getString(R.string.ext_nsfw_short)
             else -> ""
         }.uppercase()
 

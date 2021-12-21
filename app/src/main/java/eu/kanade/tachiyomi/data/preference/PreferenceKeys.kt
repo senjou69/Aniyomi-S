@@ -189,8 +189,6 @@ object PreferenceKeys {
 
     const val automaticExtUpdates = "automatic_ext_updates"
 
-    const val showNsfwSource = "show_nsfw_source"
-
     const val startScreen = "start_screen"
 
     const val useAuthenticator = "use_biometric_lock"

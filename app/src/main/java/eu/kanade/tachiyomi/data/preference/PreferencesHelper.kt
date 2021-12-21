@@ -328,8 +328,6 @@ class PreferencesHelper(val context: Context) {
 
     fun automaticExtUpdates() = flowPrefs.getBoolean(Keys.automaticExtUpdates, true)
 
-    fun showNsfwSource() = flowPrefs.getBoolean(Keys.showNsfwSource, true)
-
     fun extensionUpdatesCount() = flowPrefs.getInt("ext_updates_count", 0)
 
     fun animeextensionUpdatesCount() = flowPrefs.getInt("animeext_updates_count", 0)

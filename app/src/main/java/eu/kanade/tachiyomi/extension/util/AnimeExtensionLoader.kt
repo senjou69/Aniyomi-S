@@ -26,9 +26,6 @@ import uy.kohesive.injekt.injectLazy
 internal object AnimeExtensionLoader {
 
     private val preferences: PreferencesHelper by injectLazy()
-    private val loadNsfwSource by lazy {
-        preferences.showNsfwSource().get()
-    }
 
     private const val EXTENSION_FEATURE = "tachiyomi.animeextension"
     private const val METADATA_SOURCE_CLASS = "tachiyomi.animeextension.class"
@@ -133,7 +130,7 @@ internal object AnimeExtensionLoader {
         }
 
         val isNsfw = appInfo.metaData.getInt(METADATA_NSFW) == 1
-        if (!loadNsfwSource && isNsfw) {
+        if (isNsfw) {
             return AnimeLoadResult.Error("NSFW extension $pkgName not allowed")
         }
 

@@ -68,7 +68,6 @@ open class App : Application(), DefaultLifecycleObserver, ImageLoaderFactory {
 
         Injekt.importModule(AppModule(this))
 
-        setupAcra()
         setupNotificationChannels()
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
@@ -141,10 +140,6 @@ open class App : Application(), DefaultLifecycleObserver, ImageLoaderFactory {
         if (!AuthenticatorUtil.isAuthenticating && preferences.lockAppAfter().get() >= 0) {
             SecureActivityDelegate.locked = true
         }
-    }
-
-    protected open fun setupAcra() {
-        // removed acra
     }
 
     protected open fun setupNotificationChannels() {

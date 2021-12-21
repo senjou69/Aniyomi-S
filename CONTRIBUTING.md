@@ -29,6 +29,3 @@ When creating a fork, remember to:
     - Change or disable the [app update checker](https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/data/updater/GithubUpdateChecker.kt)
 - To avoid installation conflicts:
     - Change the `applicationId` in [`build.gradle.kts`](https://github.com/tachiyomiorg/tachiyomi/blob/master/app/build.gradle.kts)
-- To avoid having your data polluting the main app's analytics and crash report services:
-    - If you want to use Firebase analytics, replace [`google-services.json`](https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/standard/google-services.json) with your own
-    - If you want to use ACRA crash reporting, replace the `ACRA_URI` endpoint in [`build.gradle.kts`](https://github.com/tachiyomiorg/tachiyomi/blob/master/app/build.gradle.kts) with your own

@@ -12,11 +12,6 @@ plugins {
     id("com.github.zellius.shortcut-helper")
 }
 
-if (gradle.startParameter.taskRequests.toString().contains("Standard")) {
-    apply(plugin = "com.google.gms.google-services")
-    apply(plugin = "com.google.firebase.crashlytics")
-}
-
 shortcutHelper.setFilePath("./shortcuts.xml")
 
 val SUPPORTED_ABIS = setOf("armeabi-v7a", "arm64-v8a", "x86")
@@ -37,9 +32,6 @@ android {
         buildConfigField("String", "BUILD_TIME", "\"${getBuildTime()}\"")
         buildConfigField("boolean", "INCLUDE_UPDATER", "false")
         buildConfigField("boolean", "PREVIEW", "false")
-
-        // Please disable ACRA or use your own instance in forked versions of the project
-        //buildConfigField("String", "ACRA_URI", "\"https://acra.jmir.xyz/report\"")
 
         ndk {
             abiFilters += SUPPORTED_ABIS
@@ -259,11 +251,6 @@ dependencies {
 
     // Logging
     implementation("com.squareup.logcat:logcat:0.1")
-
-    // Crash reports/analytics
-    implementation("ch.acra:acra-http:5.8.1")
-    "standardImplementation"("com.google.firebase:firebase-crashlytics-ktx:18.2.4")
-    "standardImplementation"("com.google.firebase:firebase-analytics-ktx:20.0.0")
 
     // Licenses
     implementation("com.mikepenz:aboutlibraries-core:${BuildPluginsVersion.ABOUTLIB_PLUGIN}")

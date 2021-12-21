@@ -72,22 +72,6 @@
             tools:text="Language: English" />
 
         <TextView
-            android:id="@+id/nsfw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:elevation="3dp"
-            android:gravity="center"
-            android:text="@string/ext_nsfw_warning"
-            android:textAppearance="?attr/textAppearanceBodySmall"
-            android:textColor="?attr/colorError"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintTop_toBottomOf="@id/lang"
-            tools:visibility="visible" />
-
-        <TextView
             android:id="@+id/pkgname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,7 +81,7 @@
             android:textAppearance="?attr/textAppearanceBodySmall"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintTop_toBottomOf="@id/nsfw"
+            app:layout_constraintTop_toBottomOf="@id/lang"
             tools:text="eu.kanade.tachiyomi.extension.en.myext" />
 
         <Button

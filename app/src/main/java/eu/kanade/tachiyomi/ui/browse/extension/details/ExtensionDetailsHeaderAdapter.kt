@@ -38,7 +38,6 @@ class ExtensionDetailsHeaderAdapter(private val presenter: ExtensionDetailsPrese
             binding.title.text = extension.name
             binding.version.text = context.getString(R.string.ext_version_info, extension.versionName)
             binding.lang.text = context.getString(R.string.ext_language_info, LocaleHelper.getSourceDisplayName(extension.lang, context))
-            binding.nsfw.isVisible = extension.isNsfw
             binding.pkgname.text = extension.pkgName
 
             binding.btnUninstall.clicks()

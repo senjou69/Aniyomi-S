@@ -57,22 +57,20 @@ open class AnimeExtensionPresenter(
     @Synchronized
     private fun toItems(tuple: AnimeExtensionTuple): List<AnimeExtensionItem> {
         val activeLangs = preferences.enabledLanguages().get()
-        val showNsfwSources = preferences.showNsfwSource().get()
 
         val (installed, untrusted, available) = tuple
 
         val items = mutableListOf<AnimeExtensionItem>()
 
-        val updatesSorted = installed.filter { it.hasUpdate && (showNsfwSources || !it.isNsfw) }.sortedBy { it.name }
-        val installedSorted = installed.filter { !it.hasUpdate && (showNsfwSources || !it.isNsfw) }.sortedWith(compareBy({ !it.isObsolete }, { it.name }))
+        val updatesSorted = installed.filter { it.hasUpdate && !it.isNsfw }.sortedBy { it.name }
+        val installedSorted = installed.filter { !it.hasUpdate && !it.isNsfw }.sortedWith(compareBy({ !it.isObsolete }, { it.name }))
         val untrustedSorted = untrusted.sortedBy { it.name }
         val availableSorted = available
             // Filter out already installed extensions and disabled languages
             .filter { avail ->
                 installed.none { it.pkgName == avail.pkgName } &&
                     untrusted.none { it.pkgName == avail.pkgName } &&
-                    avail.lang in activeLangs &&
-                    (showNsfwSources || !avail.isNsfw)
+                    avail.lang in activeLangs && !avail.isNsfw
             }
             .sortedBy { it.name }
 
