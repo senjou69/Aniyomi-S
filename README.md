@@ -1,19 +1,19 @@
 | Build | Preview Release | Codefactor | Stable | Translate Tachiyomi | Discord Server |
 |-------|-----------|-------|----------|------------|---------|
-| ![CI](https://github.com/jmir1/aniyomi/workflows/CI/badge.svg?branch=master&event=push) | [![latest preview build](https://img.shields.io/github/v/release/jmir1/aniyomi-preview.svg?maxAge=3600&label=download)](https://github.com/jmir1/aniyomi-preview/releases) | [![CodeFactor](https://www.codefactor.io/repository/github/jmir1/aniyomi/badge)](https://www.codefactor.io/repository/github/jmir1/aniyomi) | [![stable release](https://img.shields.io/github/release/jmir1/aniyomi.svg?maxAge=3600&label=download)](https://github.com/jmir1/aniyomi/releases) | [![Translation status](https://hosted.weblate.org/widgets/tachiyomi/-/svg-badge.svg)](https://hosted.weblate.org/engage/tachiyomi/?utm_source=widget) | [![Discord](https://img.shields.io/discord/841701076242530374?label=discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/F32UjdJZrR) |
+| ![CI](https://github.com/jmir1/aniyomi/workflows/CI/badge.svg?branch=master&event=push) | [![latest preview build](https://img.shields.io/github/v/release/jmir1/aniyomi-preview.svg?maxAge=3600&label=download)](https://github.com/jmir1/aniyomi-preview/releases) | [![CodeFactor](https://www.codefactor.io/repository/github/jmir1/aniyomi/badge)](https://www.codefactor.io/repository/github/senjou69/aniyomi-s) | [![stable release](https://img.shields.io/github/release/jmir1/aniyomi.svg?maxAge=3600&label=download)](https://github.com/senjou69/Aniyomi-S/releases) | [![Translation status](https://hosted.weblate.org/widgets/tachiyomi/-/svg-badge.svg)](https://hosted.weblate.org/engage/tachiyomi/?utm_source=widget) | [![Discord](https://img.shields.io/discord/841701076242530374?label=discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/F32UjdJZrR) |
 
 
-# ![app icon](.github/readme-images/app-icon.png)Aniyomi
-Aniyomi S is an unofficial fork of the free and open source manga reader [Tachiyomi](https://github.com/tachiyomiorg/tachiyomi) that adds anime capabilities! For Android 6.0 and above.
+# ![app icon](.github/readme-images/app-icon.png)Aniyomi S
+Aniyomi S is a fork of [Aniyomi](https://github.com/jmir1/aniyomi) that includes my personally preferred features.
 
 ## Features
 
 Features include:
 * Watching anime from [a variety of sources](https://github.com/jmir1/aniyomi-extensions)
-* Everything you know and love about Tachiyomi: 
-    * Online reading from a variety of sources
-    * Local reading of downloaded content
-    * A configurable reader with multiple viewers, reading directions and other settings.
+* Everything you know and love about Aniyomi S:
+    * Online watching from a variety of sources
+    * Local watching of downloaded content
+    * A configurable player with various features.
     * Tracker support: [MyAnimeList](https://myanimelist.net/), [AniList](https://anilist.co/) and [Kitsu](https://kitsu.io/)
     * Categories to organize your library
     * Light and dark themes
@@ -21,7 +21,7 @@ Features include:
     * Create backups locally to read offline or to your desired cloud service
 
 ## Download
-Get the app from the [releases page](https://github.com/jmir1/aniyomi/releases).
+Get the app from the [releases page](https://github.com/senjou69/Aniyomi-S/releases).
 
 If you want to try new features before they get to the stable release, you can download the preview version [here](https://github.com/jmir1/aniyomi-preview/releases).
 
