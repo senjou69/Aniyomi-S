@@ -21,7 +21,6 @@ import eu.kanade.tachiyomi.data.track.TrackManager
 import eu.kanade.tachiyomi.databinding.PrefLibraryColumnsBinding
 import eu.kanade.tachiyomi.ui.base.controller.DialogController
 import eu.kanade.tachiyomi.ui.base.controller.withFadeTransaction
-import eu.kanade.tachiyomi.ui.category.CategoryController
 import eu.kanade.tachiyomi.util.preference.defaultValue
 import eu.kanade.tachiyomi.util.preference.entriesRes
 import eu.kanade.tachiyomi.util.preference.intListPreference
@@ -124,38 +123,6 @@ class SettingsLibraryController : SettingsController() {
                     ?: context.getString(R.string.default_category_summary)
                 onChange { newValue ->
                     summary = categoriesAnime.find {
-                        it.id == (newValue as String).toInt()
-                    }?.name ?: context.getString(R.string.default_category_summary)
-                    true
-                }
-            }
-
-            preference {
-                key = "pref_action_edit_categories"
-                titleRes = R.string.action_edit_categories
-
-                val catCount = dbCategories.size
-                summary = context.resources.getQuantityString(R.plurals.num_categories, catCount, catCount)
-
-                onClick {
-                    router.pushController(CategoryController().withFadeTransaction())
-                }
-            }
-
-            intListPreference {
-                key = Keys.defaultCategory
-                titleRes = R.string.default_category
-
-                entries = arrayOf(context.getString(R.string.default_category_summary)) +
-                    categories.map { it.name }.toTypedArray()
-                entryValues = arrayOf("-1") + categories.map { it.id.toString() }.toTypedArray()
-                defaultValue = "-1"
-
-                val selectedCategory = categories.find { it.id == preferences.defaultCategory() }
-                summary = selectedCategory?.name
-                    ?: context.getString(R.string.default_category_summary)
-                onChange { newValue ->
-                    summary = categories.find {
                         it.id == (newValue as String).toInt()
                     }?.name ?: context.getString(R.string.default_category_summary)
                     true
@@ -279,46 +246,7 @@ class SettingsLibraryController : SettingsController() {
                     .onEach { updateSummary() }
                     .launchIn(viewScope)
             }
-            preference {
-                key = Keys.libraryUpdateCategories
-                titleRes = R.string.categories
-                onClick {
-                    LibraryGlobalUpdateCategoriesDialog().showDialog(router)
-                }
 
-                fun updateSummary() {
-                    val selectedCategories = preferences.libraryUpdateCategories().get()
-                        .mapNotNull { id -> categories.find { it.id == id.toInt() } }
-                        .sortedBy { it.order }
-                    val includedItemsText = if (selectedCategories.isEmpty()) {
-                        context.getString(R.string.all)
-                    } else {
-                        selectedCategories.joinToString { it.name }
-                    }
-
-                    val excludedCategories = preferences.libraryUpdateCategoriesExclude().get()
-                        .mapNotNull { id -> categories.find { it.id == id.toInt() } }
-                        .sortedBy { it.order }
-                    val excludedItemsText = if (excludedCategories.isEmpty()) {
-                        context.getString(R.string.none)
-                    } else {
-                        excludedCategories.joinToString { it.name }
-                    }
-
-                    summary = buildSpannedString {
-                        append(context.getString(R.string.include, includedItemsText))
-                        appendLine()
-                        append(context.getString(R.string.exclude, excludedItemsText))
-                    }
-                }
-
-                preferences.libraryUpdateCategories().asFlow()
-                    .onEach { updateSummary() }
-                    .launchIn(viewScope)
-                preferences.libraryUpdateCategoriesExclude().asFlow()
-                    .onEach { updateSummary() }
-                    .launchIn(viewScope)
-            }
             intListPreference {
                 key = Keys.libraryUpdatePrioritization
                 titleRes = R.string.pref_library_update_prioritization
@@ -448,55 +376,6 @@ class SettingsLibraryController : SettingsController() {
 
                     preferences.animelibUpdateCategories().set(included)
                     preferences.animelibUpdateCategoriesExclude().set(excluded)
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .create()
-        }
-    }
-
-    class LibraryGlobalUpdateCategoriesDialog : DialogController() {
-
-        private val preferences: PreferencesHelper = Injekt.get()
-        private val db: DatabaseHelper = Injekt.get()
-
-        override fun onCreateDialog(savedViewState: Bundle?): Dialog {
-            val dbCategories = db.getCategories().executeAsBlocking()
-            val categories = listOf(Category.createDefault(activity!!)) + dbCategories
-
-            val items = categories.map { it.name }
-            var selected = categories
-                .map {
-                    when (it.id.toString()) {
-                        in preferences.libraryUpdateCategories().get() -> QuadStateTextView.State.CHECKED.ordinal
-                        in preferences.libraryUpdateCategoriesExclude().get() -> QuadStateTextView.State.INVERSED.ordinal
-                        else -> QuadStateTextView.State.UNCHECKED.ordinal
-                    }
-                }
-                .toIntArray()
-
-            return MaterialAlertDialogBuilder(activity!!)
-                .setTitle(R.string.categories)
-                .setQuadStateMultiChoiceItems(
-                    message = R.string.pref_library_update_categories_details,
-                    items = items,
-                    initialSelected = selected
-                ) { selections ->
-                    selected = selections
-                }
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val included = selected
-                        .mapIndexed { index, value -> if (value == QuadStateTextView.State.CHECKED.ordinal) index else null }
-                        .filterNotNull()
-                        .map { categories[it].id.toString() }
-                        .toSet()
-                    val excluded = selected
-                        .mapIndexed { index, value -> if (value == QuadStateTextView.State.INVERSED.ordinal) index else null }
-                        .filterNotNull()
-                        .map { categories[it].id.toString() }
-                        .toSet()
-
-                    preferences.libraryUpdateCategories().set(included)
-                    preferences.libraryUpdateCategoriesExclude().set(excluded)
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .create()

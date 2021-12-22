@@ -121,25 +121,6 @@ class SettingsDownloadController : SettingsController() {
                         }
                     }.launchIn(viewScope)
             }
-            multiSelectListPreference {
-                key = Keys.removeExcludeCategories
-                titleRes = R.string.pref_remove_exclude_categories_manga
-                entries = mangaCategories.map { it.name }.toTypedArray()
-                entryValues = mangaCategories.map { it.id.toString() }.toTypedArray()
-
-                preferences.removeExcludeCategories().asFlow()
-                    .onEach { mutable ->
-                        val selected = mutable
-                            .mapNotNull { id -> mangaCategories.find { it.id == id.toInt() } }
-                            .sortedBy { it.order }
-
-                        summary = if (selected.isEmpty()) {
-                            resources?.getString(R.string.none)
-                        } else {
-                            selected.joinToString { it.name }
-                        }
-                    }.launchIn(viewScope)
-            }
         }
 
         preferenceCategory {
