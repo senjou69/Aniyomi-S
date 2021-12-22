@@ -21,7 +21,7 @@ android {
     ndkVersion = AndroidConfig.ndk
 
     defaultConfig {
-        applicationId = "xyz.jmir.tachiyomi.mi"
+        applicationId = "senjou.aniyomi.s"
         minSdk = AndroidConfig.minSdk
         targetSdk = AndroidConfig.targetSdk
         versionCode = 71

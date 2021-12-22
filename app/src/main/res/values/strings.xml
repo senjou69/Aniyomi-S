@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Aniyomi</string>
+    <string name="app_name" translatable="false">Aniyomi S</string>
 
     <!-- Models -->
     <string name="name">Name</string>
@@ -39,7 +39,7 @@
     <string name="label_default">Default</string>
     <string name="label_warning">Warning</string>
 
-    <string name="unlock_app">Unlock Aniyomi</string>
+    <string name="unlock_app">Unlock Aniyomi S</string>
     <string name="confirm_lock_change">Authenticate to confirm change</string>
     <string name="confirm_exit">Press back again to exit</string>
 
@@ -916,7 +916,7 @@
     <string name="label_updates">Updates</string>
     <string name="player_overlay_back">Back</string>
 
-    <!-- Aniyomi stuff -->
+    <!-- Aniyomi S stuff -->
     <string name="playback_speed_dialog_title">Change playback speed:</string>
     <string name="playback_speed_dialog_reset">Reset</string>
     <string name="playback_quality_dialog_title">Change video quality:</string>
