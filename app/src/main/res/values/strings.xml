@@ -25,6 +25,7 @@
     <string name="label_manga">Manga</string>
     <string name="label_recent_updates">Updates</string>
     <string name="label_recent_manga">History</string>
+    <string name="label_recents">Recents</string>
     <string name="label_sources">Sources</string>
     <string name="label_mangasources">Manga Sources</string>
     <string name="label_animesources">Anime Sources</string>
@@ -910,10 +911,9 @@
     <string name="watcher_controls_skip_text">+85 s</string>
     <string name="no_next_episode">Next Episode not found!</string>
     <string name="anime_description_cover">Cover of Anime</string>
-    <string name="label_history">Manga</string>
-    <string name="label_animehistory">Anime</string>
-    <string name="label_updates">Manga</string>
-    <string name="label_animeupdates">Anime</string>
+    <string name="label_history">History</string>
+    <string name="label_animehistoryf">Anime</string>
+    <string name="label_updates">Updates</string>
     <string name="player_overlay_back">Back</string>
 
     <!-- Aniyomi stuff -->

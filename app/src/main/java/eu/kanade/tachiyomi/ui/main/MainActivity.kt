@@ -58,8 +58,6 @@ import eu.kanade.tachiyomi.ui.browse.animesource.browse.BrowseAnimeSourceControl
 import eu.kanade.tachiyomi.ui.browse.animesource.globalsearch.GlobalAnimeSearchController
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceController
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchController
-import eu.kanade.tachiyomi.ui.download.DownloadTabsController
-import eu.kanade.tachiyomi.ui.library.LibraryController
 import eu.kanade.tachiyomi.ui.manga.MangaController
 import eu.kanade.tachiyomi.ui.more.MoreController
 import eu.kanade.tachiyomi.ui.more.NewUpdateDialogController
@@ -89,9 +87,8 @@ class MainActivity : BaseViewBindingActivity<MainActivityBinding>() {
     private val startScreenId by lazy {
         when (preferences.startScreen()) {
             1 -> R.id.nav_animelib
-            2 -> R.id.nav_library
-            3 -> R.id.nav_updates
-            4 -> R.id.nav_browse
+            2 -> R.id.nav_updates
+            3 -> R.id.nav_browse
             else -> R.id.nav_animelib
         }
     }
@@ -173,7 +170,6 @@ class MainActivity : BaseViewBindingActivity<MainActivityBinding>() {
             val currentRoot = router.backstack.firstOrNull()
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
-                    R.id.nav_library -> router.setRoot(LibraryController(), id)
                     R.id.nav_animelib -> router.setRoot(AnimelibController(), id)
                     R.id.nav_updates -> router.setRoot(UpdatesTabsController(), id)
                     R.id.nav_browse -> router.setRoot(BrowseController(), id)
@@ -181,13 +177,9 @@ class MainActivity : BaseViewBindingActivity<MainActivityBinding>() {
                 }
             } else if (!isHandlingShortcut) {
                 when (id) {
-                    R.id.nav_library -> {
-                        val controller = router.getControllerWithTag(id.toString()) as? LibraryController
-                        controller?.showSettingsSheet()
-                    }
                     R.id.nav_updates -> {
                         if (router.backstackSize == 1) {
-                            router.pushController(DownloadTabsController().withFadeTransaction())
+                            router.pushController(AnimeDownloadController().withFadeTransaction())
                         }
                     }
                     R.id.nav_animelib -> {
@@ -416,7 +408,6 @@ class MainActivity : BaseViewBindingActivity<MainActivityBinding>() {
         isHandlingShortcut = true
 
         when (intent.action) {
-            SHORTCUT_LIBRARY -> setSelectedNavItem(R.id.nav_library)
             SHORTCUT_ANIMELIB -> setSelectedNavItem(R.id.nav_animelib)
             SHORTCUT_RECENTLY_UPDATED -> setSelectedNavItem(R.id.nav_updates)
             // SHORTCUT_RECENTLY_READ -> setSelectedNavItem(R.id.nav_history)
@@ -427,14 +418,6 @@ class MainActivity : BaseViewBindingActivity<MainActivityBinding>() {
                 }
                 setSelectedNavItem(R.id.nav_browse)
                 router.pushController(BrowseController(toExtensions = true).withFadeTransaction())
-            }
-            SHORTCUT_MANGA -> {
-                val extras = intent.extras ?: return false
-                if (router.backstackSize > 1) {
-                    router.popToRoot()
-                }
-                setSelectedNavItem(R.id.nav_library)
-                router.pushController(MangaController(extras).withFadeTransaction())
             }
             SHORTCUT_ANIME -> {
                 val extras = intent.extras ?: return false

@@ -183,7 +183,6 @@ open class ExtensionController :
 
         // Update badge on parent controller tab
         val ctrl = parentController as BrowseController
-        ctrl.setExtensionUpdateBadge()
         ctrl.extensionListUpdateRelay.call(true)
     }
 

@@ -81,7 +81,6 @@ import eu.kanade.tachiyomi.ui.manga.track.TrackSheet
 import eu.kanade.tachiyomi.ui.reader.ReaderActivity
 import eu.kanade.tachiyomi.ui.recent.HistoryTabsController
 import eu.kanade.tachiyomi.ui.recent.UpdatesTabsController
-import eu.kanade.tachiyomi.ui.recent.history.HistoryController
 import eu.kanade.tachiyomi.ui.recent.updates.UpdatesController
 import eu.kanade.tachiyomi.ui.webview.WebViewActivity
 import eu.kanade.tachiyomi.util.chapter.NoChaptersException
@@ -669,13 +668,6 @@ class MangaController :
             is UpdatesTabsController,
             is HistoryTabsController,
             is UpdatesController,
-            is HistoryController -> {
-                // Manually navigate to LibraryController
-                router.handleBack()
-                (router.activity as MainActivity).setSelectedNavItem(R.id.nav_library)
-                val controller = router.getControllerWithTag(R.id.nav_library.toString()) as LibraryController
-                controller.search(query)
-            }
             is LatestUpdatesController -> {
                 // Search doesn't currently work in source Latest view
                 return
