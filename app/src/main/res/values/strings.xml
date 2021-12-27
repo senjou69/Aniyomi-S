@@ -51,7 +51,7 @@
     <string name="action_filter_bookmarked">Bookmarked</string>
     <string name="action_filter_tracked">Tracked</string>
     <string name="action_filter_unread">Unread</string>
-    <string name="action_filter_unseen">Unseen</string>
+    <string name="action_filter_unseen">Unwatched</string>
     <string name="action_filter_empty">Remove filter</string>
     <string name="action_sort_alpha">Alphabetically</string>
     <string name="action_sort_count">Total manga</string>
@@ -75,12 +75,12 @@
     <string name="action_mark_as_seen">Mark as watched</string>
     <string name="action_mark_as_unseen">Mark as unwatched</string>
     <string name="action_mark_previous_as_read">Mark previous as read</string>
-    <string name="action_mark_previous_as_seen">Mark previous as seen</string>
+    <string name="action_mark_previous_as_seen">Mark previous as watched</string>
     <string name="action_download">Download</string>
     <string name="action_play_internally">Play internally</string>
     <string name="action_play_externally">Play externally</string>
     <string name="action_download_unread">Download unread chapters</string>
-    <string name="action_download_unseen">Download unseen episodes</string>
+    <string name="action_download_unseen">Download unwatched episodes</string>
     <string name="action_bookmark">Bookmark chapter</string>
     <string name="action_bookmark_episode">Bookmark episode</string>
     <string name="action_remove_bookmark">Unbookmark chapter</string>
@@ -125,7 +125,7 @@
     <string name="action_display_download_badge">Downloaded chapters</string>
     <string name="action_display_download_badge_anime">Downloaded episodes</string>
     <string name="action_display_unread_badge">Unread chapters</string>
-    <string name="action_display_unseen_badge">Unseen episodes</string>
+    <string name="action_display_unseen_badge">Unwatched episodes</string>
     <string name="action_display_local_badge">Local manga</string>
     <string name="action_display_local_badge_anime">Local anime</string>
     <string name="action_display_language_badge">Language</string>
@@ -240,7 +240,7 @@
     <string name="pref_library_columns">Items per row</string>
     <string name="portrait">Portrait</string>
     <string name="landscape">Landscape</string>
-    <string name="pref_jump_to_chapters">Jump to chapters on open</string>
+    <string name="pref_jump_to_chapters">Jump to episodes on open</string>
 
     <string name="pref_category_library_update">Global update</string>
     <string name="pref_library_update_interval">Update frequency</string>
@@ -257,7 +257,7 @@
     <string name="charging">Charging</string>
     <string name="restrictions">Restrictions: %s</string>
     <string name="pref_update_only_non_completed">Only update ongoing series</string>
-    <string name="pref_library_update_show_tab_badge">Show unread/unseen count on Updates icon</string>
+    <string name="pref_library_update_show_tab_badge">Show unwatched count on Updates icon</string>
     <string name="pref_library_update_refresh_metadata">Automatically refresh metadata</string>
     <string name="pref_library_update_refresh_metadata_summary">Check for new cover and details when updating library</string>
     <string name="pref_library_update_refresh_trackers">Automatically refresh trackers</string>
@@ -297,7 +297,7 @@
     <string name="untrusted_extension">Untrusted extension</string>
     <string name="untrusted_extension_message">This extension was signed with an untrusted certificate and wasn\'t activated.\n\nA malicious extension could read any login credentials stored in Tachiyomi or execute arbitrary code.\n\nBy trusting this certificate you accept these risks.</string>
     <string name="obsolete_extension_message">This extension is no longer available.</string>
-    <string name="unofficial_extension_message">This extension is not from the official Tachiyomi extensions list.</string>
+    <string name="unofficial_extension_message">This extension is not from the official Aniyomi S extensions list.</string>
     <string name="extension_api_error">Failed to get extensions list</string>
     <string name="ext_version_info">Version: %1$s</string>
     <string name="ext_language_info">Language: %1$s</string>
@@ -441,32 +441,32 @@
       <!-- Downloads section -->
     <string name="episode_download_progress">%1$d%%</string>
     <string name="pref_download_directory">Download location</string>
-    <string name="pref_category_delete_chapters">Delete chapters/episodes</string>
-    <string name="pref_remove_after_marked_as_read">After marked as read/watched</string>
-    <string name="pref_remove_after_read">Automatically after reading/watching</string>
-    <string name="pref_remove_bookmarked_chapters">Allow deleting bookmarked chapters/episodes</string>
+    <string name="pref_category_delete_chapters">Delete episodes</string>
+    <string name="pref_remove_after_marked_as_read">After marked as watched</string>
+    <string name="pref_remove_after_read">Automatically after watching</string>
+    <string name="pref_remove_bookmarked_chapters">Allow deleting bookmarked episodes</string>
     <string name="pref_remove_exclude_categories_manga">Excluded manga categories</string>
     <string name="pref_remove_exclude_categories_anime">Excluded anime categories</string>
     <string name="pref_remove_exclude_categories_anime_prefix">Anime: </string>
     <string name="pref_remove_exclude_categories_manga_prefix">Manga: </string>
     <string name="custom_dir">Custom location</string>
     <string name="disabled">Disabled</string>
-    <string name="last_read_chapter">Last read chapter</string>
-    <string name="second_to_last">Second to last chapter</string>
-    <string name="third_to_last">Third to last chapter</string>
-    <string name="fourth_to_last">Fourth to last chapter</string>
-    <string name="fifth_to_last">Fifth to last chapter</string>
+    <string name="last_read_chapter">Last read episode</string>
+    <string name="second_to_last">Second to last episode</string>
+    <string name="third_to_last">Third to last episode</string>
+    <string name="fourth_to_last">Fourth to last episode</string>
+    <string name="fifth_to_last">Fifth to last episode</string>
     <string name="pref_category_auto_download">Auto-download</string>
     <string name="pref_category_anime_download">Anime downloads</string>
     <string name="pref_use_external_downloader">Always use external downloader for anime</string>
     <string name="pref_external_downloader_selection">Downloader app preference</string>
-    <string name="pref_download_new">Download new chapters</string>
+    <string name="pref_download_new">Download new episodes</string>
     <string name="pref_download_new_categories_details">Manga in excluded categories will not be downloaded even if they are also in included categories.</string>
     <string name="pref_download_new_anime_categories_details">Anime in excluded categories will not be downloaded even if they are also in included categories.</string>
 
       <!-- Tracking section -->
     <string name="tracking_guide">Tracking guide</string>
-    <string name="pref_auto_update_manga_sync">Update progress after reading</string>
+    <string name="pref_auto_update_manga_sync">Update progress after watching</string>
     <string name="services">Services</string>
     <string name="tracking_info">One-way sync to update the chapter progress in tracking services. Set up tracking for individual manga entries from their tracking button.</string>
     <string name="enhanced_services">Enhanced services</string>
@@ -520,19 +520,19 @@
     <string name="requires_app_restart">Requires app restart to take effect</string>
     <string name="cookies_cleared">Cookies cleared</string>
     <string name="label_data">Data</string>
-    <string name="pref_clear_chapter_cache">Clear chapter and episode cache</string>
+    <string name="pref_clear_chapter_cache">Clear episode cache</string>
     <string name="used_cache">Used: %1$s</string>
     <string name="used_cache_both">Used by anime: %1$s, used by manga; %2$s</string>
     <string name="cache_deleted">Cache cleared. %1$d files have been deleted</string>
     <string name="cache_delete_error">An error occurred while clearing cache</string>
-    <string name="pref_auto_clear_chapter_cache">Clear chapter/episode cache on app close</string>
+    <string name="pref_auto_clear_chapter_cache">Clear episode cache on app close</string>
     <string name="pref_clear_database">Clear database</string>
-    <string name="pref_clear_database_summary">Delete history for anime and manga that are not saved in your library</string>
+    <string name="pref_clear_database_summary">Delete history for anime that are not saved in your library</string>
     <plurals name="clear_database_source_item_count">
         <item quantity="one">1 non-library entry in database</item>
         <item quantity="other">%1$s non-library entries in database</item>
     </plurals>
-    <string name="clear_database_confirmation">Are you sure? Completed episodes and chapters and progress of non-library entries will be lost</string>
+    <string name="clear_database_confirmation">Are you sure? Completed episodes and progress of non-library entries will be lost</string>
     <string name="clear_database_completed">Entries deleted</string>
     <string name="database_clean">Database clean</string>
     <string name="pref_refresh_library_covers">Refresh library covers</string>
@@ -668,7 +668,7 @@
     <string name="show_episode_number">Episode number</string>
     <string name="sorting_mode">Sorting mode</string>
     <string name="sort_by_source">By source</string>
-    <string name="sort_by_number">By chapter number</string>
+    <string name="sort_by_number">By episodes number</string>
     <string name="sort_by_episode_number">By episode number</string>
     <string name="sort_by_upload_date">By upload date</string>
     <string name="manga_download">Download</string>
