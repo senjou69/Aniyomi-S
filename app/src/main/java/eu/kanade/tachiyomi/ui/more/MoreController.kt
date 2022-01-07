@@ -19,7 +19,7 @@ import eu.kanade.tachiyomi.ui.setting.SettingsBackupController
 import eu.kanade.tachiyomi.ui.setting.SettingsController
 import eu.kanade.tachiyomi.ui.setting.SettingsMainController
 import eu.kanade.tachiyomi.util.preference.add
-import eu.kanade.tachiyomi.util.preference.defaultValue
+import eu.kanade.tachiyomi.util.preference.bindTo
 import eu.kanade.tachiyomi.util.preference.iconRes
 import eu.kanade.tachiyomi.util.preference.iconTint
 import eu.kanade.tachiyomi.util.preference.onClick
@@ -37,7 +37,6 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.subscriptions.CompositeSubscription
 import uy.kohesive.injekt.injectLazy
-import eu.kanade.tachiyomi.data.preference.PreferenceKeys as Keys
 import eu.kanade.tachiyomi.ui.animecategory.CategoryController as AnimeCategoryController
 
 class MoreController :
@@ -63,7 +62,7 @@ class MoreController :
         add(MoreHeaderPreference(context))
 
         switchPreference {
-            key = Keys.downloadedOnly
+            bindTo(preferences.downloadedOnly())
             titleRes = R.string.label_downloaded_only
             summaryRes = R.string.downloaded_only_summary
             iconRes = R.drawable.ic_cloud_off_24dp
@@ -71,12 +70,11 @@ class MoreController :
         }
 
         switchPreference {
-            key = Keys.incognitoMode
+            bindTo(preferences.incognitoMode())
             summaryRes = R.string.pref_incognito_mode_summary
             titleRes = R.string.pref_incognito_mode
             iconRes = R.drawable.ic_glasses_24dp
             iconTint = tintColor
-            defaultValue = false
 
             preferences.incognitoMode().asFlow()
                 .onEach { isChecked = it }

@@ -118,4 +118,4 @@ class SettingsTrackingController :
     }
 }
 
-private const val HELP_URL = "https://tachiyomi.org/help/guides/tracking/"
+private const val HELP_URL = "https://aniyomi.jmir.xyz/help/guides/tracking/"

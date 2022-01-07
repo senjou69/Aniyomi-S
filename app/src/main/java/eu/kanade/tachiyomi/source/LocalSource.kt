@@ -34,7 +34,6 @@ import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 import java.util.zip.ZipFile
 
@@ -42,7 +41,7 @@ class LocalSource(private val context: Context) : CatalogueSource, UnmeteredSour
 
     companion object {
         const val ID = 0L
-        const val HELP_URL = "https://tachiyomi.org/help/guides/local-manga/"
+        const val HELP_URL = "https://aniyomi.jmir.xyz/help/guides/local-manga/"
 
         private const val COVER_NAME = "cover.jpg"
         private val LATEST_THRESHOLD = TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)
@@ -111,9 +110,9 @@ class LocalSource(private val context: Context) : CatalogueSource, UnmeteredSour
         when (state?.index) {
             0 -> {
                 mangaDirs = if (state.ascending) {
-                    mangaDirs.sortedBy { it.name.lowercase(Locale.ENGLISH) }
+                    mangaDirs.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.name }))
                 } else {
-                    mangaDirs.sortedByDescending { it.name.lowercase(Locale.ENGLISH) }
+                    mangaDirs.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, { it.name }))
                 }
             }
             1 -> {
@@ -176,7 +175,7 @@ class LocalSource(private val context: Context) : CatalogueSource, UnmeteredSour
             .asSequence()
             .mapNotNull { File(it, manga.key).listFiles()?.toList() }
             .flatten()
-            .firstOrNull { it.extension.lowercase() == "json" }
+            .firstOrNull { it.extension.equals("json", ignoreCase = true) }
 
         return if (localDetails != null) {
             val obj = json.decodeFromStream<JsonObject>(localDetails.inputStream())

@@ -6,7 +6,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
 import androidx.preference.PreferenceScreen
@@ -17,8 +16,8 @@ import eu.kanade.tachiyomi.data.database.AnimeDatabaseHelper
 import eu.kanade.tachiyomi.data.database.DatabaseHelper
 import eu.kanade.tachiyomi.data.database.models.Category
 import eu.kanade.tachiyomi.data.preference.PreferencesHelper
-import eu.kanade.tachiyomi.data.preference.asImmediateFlow
 import eu.kanade.tachiyomi.ui.base.controller.DialogController
+import eu.kanade.tachiyomi.util.preference.bindTo
 import eu.kanade.tachiyomi.util.preference.defaultValue
 import eu.kanade.tachiyomi.util.preference.entriesRes
 import eu.kanade.tachiyomi.util.preference.intListPreference
@@ -54,7 +53,7 @@ class SettingsDownloadController : SettingsController() {
         val animeCategories = listOf(Category.createDefault(context)) + dbAnimeCategories
 
         preference {
-            key = Keys.downloadsDirectory
+            bindTo(preferences.downloadsDirectory())
             titleRes = R.string.pref_download_directory
             onClick {
                 val ctrl = DownloadDirectoriesDialog()
@@ -103,7 +102,7 @@ class SettingsDownloadController : SettingsController() {
                 defaultValue = false
             }
             multiSelectListPreference {
-                key = Keys.removeExcludeCategoriesAnime
+                bindTo(preferences.removeExcludeAnimeCategories())
                 titleRes = R.string.pref_remove_exclude_categories_anime
                 entries = animeCategories.map { it.name }.toTypedArray()
                 entryValues = animeCategories.map { it.id.toString() }.toTypedArray()
@@ -127,19 +126,17 @@ class SettingsDownloadController : SettingsController() {
             titleRes = R.string.pref_category_auto_download
 
             switchPreference {
-                key = Keys.downloadNew
+                bindTo(preferences.downloadNew())
                 titleRes = R.string.pref_download_new
-                defaultValue = false
             }
             preference {
-                key = Keys.downloadNewCategoriesAnime
+                bindTo(preferences.downloadNewCategoriesAnime())
                 titleRes = R.string.anime_categories
                 onClick {
                     DownloadAnimeCategoriesDialog().showDialog(router)
                 }
 
-                preferences.downloadNew().asImmediateFlow { isVisible = it }
-                    .launchIn(viewScope)
+                visibleIf(preferences.downloadNew()) { it }
 
                 fun updateSummary() {
                     val selectedCategories = preferences.downloadNewCategoriesAnime().get()
@@ -175,14 +172,13 @@ class SettingsDownloadController : SettingsController() {
                     .launchIn(viewScope)
             }
             preference {
-                key = Keys.downloadNewCategories
+                bindTo(preferences.downloadNewCategories())
                 titleRes = R.string.categories
                 onClick {
                     DownloadCategoriesDialog().showDialog(router)
                 }
 
-                preferences.downloadNew().asImmediateFlow { isVisible = it }
-                    .launchIn(viewScope)
+                visibleIf(preferences.downloadNew()) { it }
 
                 fun updateSummary() {
                     val selectedCategories = preferences.downloadNewCategories().get()
@@ -293,11 +289,8 @@ class SettingsDownloadController : SettingsController() {
         override fun onCreateDialog(savedViewState: Bundle?): Dialog {
             val activity = activity!!
             val currentDir = preferences.downloadsDirectory().get()
-            val externalDirs = (getExternalDirs() + File(activity.getString(R.string.custom_dir))).map(File::toString)
-            var selectedIndex = externalDirs.indexOfFirst { it in currentDir }.let {
-                if (it == -1) 0
-                else it
-            }
+            val externalDirs = listOf(getDefaultDownloadDir(), File(activity.getString(R.string.custom_dir))).map(File::toString)
+            var selectedIndex = externalDirs.indexOfFirst { it in currentDir }
 
             return MaterialAlertDialogBuilder(activity)
                 .setTitle(R.string.pref_download_directory)
@@ -315,13 +308,12 @@ class SettingsDownloadController : SettingsController() {
                 .create()
         }
 
-        private fun getExternalDirs(): List<File> {
+        private fun getDefaultDownloadDir(): File {
             val defaultDir = Environment.getExternalStorageDirectory().absolutePath +
                 File.separator + resources?.getString(R.string.app_name) +
                 File.separator + "downloads"
 
-            return mutableListOf(File(defaultDir)) +
-                ContextCompat.getExternalFilesDirs(activity!!, "").filterNotNull()
+            return File(defaultDir)
         }
     }
 
